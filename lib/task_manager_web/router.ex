@@ -37,6 +37,13 @@ defmodule TaskManagerWeb.Router do
     scope "/dev" do
       pipe_through :browser
 
+      live "/tasks", TaskLive.Index, :index
+      live "/tasks/new", TaskLive.Index, :new
+      live "/tasks/:id/edit", TaskLive.Index, :edit
+
+      live "/tasks/:id", TaskLive.Show, :show
+      live "/tasks/:id/show/edit", TaskLive.Show, :edit
+
       live_dashboard "/dashboard", metrics: TaskManagerWeb.Telemetry
       forward "/mailbox", Plug.Swoosh.MailboxPreview
     end
